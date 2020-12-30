@@ -8,7 +8,9 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -51,17 +53,27 @@ public class TesteConsumidor {
 		MessageConsumer consumer = session.createConsumer(fila);
 		
 		/*
-		 * O método receive retorna uma mensagem.
+		 * MessageListener é uma interface que possui os contratos para a tratativa de recebimento de mensagens
+		 * onMessage trata as mensagens recebidas
 		 */
-		Message message = consumer.receive();
+		consumer.setMessageListener(new MessageListener() {
+			
+			@Override
+			public void onMessage(Message message) {
+				
+				TextMessage textMessage = (TextMessage) message;
+				
+				try {
+					System.out.println("Recebendo mensagem: " + textMessage.getText());
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+		});
 		
-		System.out.println("Recebendo mensagem: " + message);
-		
-		/*
-		 * O Scanner é apenas para manter a conexão aberta
-		 */
-		new Scanner(System.in).nextLine();		
-		
+		new Scanner(System.in).nextLine();
+				
 		session.close();
 		connection.close();
 		context.close();
