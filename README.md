@@ -10,3 +10,5 @@ Iniciar o ActiveMQ entrando pelo terminal no diretorio /apache-activemq-5.16.0/b
 comando activemq console para executar com o console de logs.
 
 Vai iniciar em http://127.0.0.1:8161/
+user admin
+pass admin
