@@ -72,6 +72,9 @@ public class TesteConsumidor {
 			}
 		});
 		
+		/*
+		 * O Scanner serve apenas para manter o sistema executando até que seja pressionado Enter no terminal
+		 */
 		new Scanner(System.in).nextLine();
 				
 		session.close();
